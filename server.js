@@ -9,6 +9,12 @@ const mongoose = require('mongoose');
 const app = express();
 // get mongoose set up
 mongoose.connect('mongodb://'+ process.env.UN +":" + process.env.PW + '@ds157089.mlab.com:57089/quext');
+mongoose.Promise = global.Promise;
+//gets default connection
+const db = mongoose.connection;
+
+//bind connection
+db.on('error', console.error.bind(console, 'mongoDB connection error:'));
 
 app.use(bodyParser.urlencoded({extended:false}));
 
